@@ -23,7 +23,7 @@ int main()
             for (auto p : primes)
             {
                 // i is a prime factor of x if none of the already
-                // calculated prime factors of x is not a factor of i
+                // calculated prime factors of x is a factor of i
                 if (i%p == 0)
                 {
                     is_prime = false;
