@@ -1,20 +1,34 @@
-# making all .cpp files in the directory
-# each one into its own target
+# building the euler library and executable running all problems
 
 CXX ?= g++
 
-CXXFLAGS ?= -Wall -std=c++11
+CXXFLAGS ?= -Wall -std=c++11 -O3
 
 .PHONY: all clean
 
-SRCS = $(wildcard *.cpp)
+LIBOBJS = problem1 \
+	   problem2 \
+	   problem3 \
+	   problem4
 
-PROGS = $(patsubst %.cpp,%,$(SRCS))
+_LIBOBJS = $(addsuffix .o, $(LIBOBJS))
 
-all: $(PROGS)
+LIB = euler
+_LIB = $(addsuffix .a, $(addprefix lib, $(LIB)))
 
-%: %.cpp
-	$(CXX) $(CXXFLAGS) -o $@ $<
+PROG = problems
+
+all: $(PROG)
+
+$(PROG): $(addsuffix .cpp, $(PROG)) $(addsuffix .h, $(PROG)) $(_LIB)
+	$(CXX) $(CXXFLAGS) -o $@ $< -L . -l$(LIB)
+
+$(_LIB): $(_LIBOBJS)
+	ar -rcs $@ $(_LIBOBJS)
+
+$(_LIBOBJS): $(addsuffix .cpp, $(LIBOBJS))
+	$(CXX) $(CXXFLAGS) -c -o $@ $(@:%.o=%.cpp)
 
 clean: 
-	rm -f $(PROGS)
+	rm -f $(PROG) $(_LIB) $(_LIBOBJS)
+

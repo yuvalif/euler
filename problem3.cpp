@@ -3,13 +3,13 @@
 //
 // What is the largest prime factor of the number 600851475143 ?
 
-#include <iostream>
 #include <vector>
+#include <utility>
 #include <math.h>
 
-int main()
+// return all prime factors in a vector, ordered from smallest to largets
+std::vector<unsigned long long> prime_factors(unsigned long long x)
 {
-    const unsigned long long x = 600851475143;
     const unsigned long long upper_bound = (const unsigned long long)sqrt(x);
     std::vector<unsigned long long> primes;
 
@@ -37,9 +37,15 @@ int main()
         }
     }
 
+    return primes;
+}
+
+unsigned long long Problem3()
+{
+    const std::vector<unsigned long long>& primes = prime_factors(600851475143ULL);
     if (primes.size() > 0)
     {
-        std::cout << primes[primes.size()-1] << std::endl;
+        return primes[primes.size()-1];
     }
     return 0;
 }

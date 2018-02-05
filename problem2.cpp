@@ -5,7 +5,6 @@
 //
 // By considering the terms in the Fibonacci sequence whose values do not exceed four million, find the sum of the even-valued terms.
 
-#include <iostream>
 #include <math.h>
 
 const double sqrt_5 = sqrt(5);
@@ -29,14 +28,12 @@ unsigned long long find_nearest_fibonacci_index(unsigned n)
     return (unsigned long long)((log(n) + log_sqrt_5)/log_phi);
 }
 
-int main()
+unsigned long long Problem2()
 {
     const unsigned index_before_4M = find_nearest_fibonacci_index(4000000);
     // Sum of fibonacci series up to the nth element is:
     // S(n) = Fibonacci(n+2) -1
     // Sum of even values elements equals the sum of all elements divided by 2:
-    std::cout << (fibonacci(index_before_4M+2) - 1 )/2 << std::endl;
-
-    return 0;
+    return (fibonacci(index_before_4M+2) - 1 )/2;
 }
 

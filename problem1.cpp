@@ -3,7 +3,7 @@
 //
 // Find the sum of all the multiples of 3 or 5 below 1000.
 
-#include <iostream>
+#include <algorithm>
 
 // sum of arithmetic series given:
 // first element (a1)
@@ -47,13 +47,11 @@ unsigned lcm(unsigned x, unsigned y)
     return x*y/gcd(x,y);
 }
 
-int main()
+unsigned Problem1()
 {
     // summaries the multiples of 3 and 5 under 1000, and removes the ones counted twice
-    std::cout << sum_of_multiples_under_n(3, 1000) + 
+    return sum_of_multiples_under_n(3, 1000) + 
         sum_of_multiples_under_n(5, 1000) - 
-        sum_of_multiples_under_n(lcm(3,5), 1000) << std::endl;
-
-    return 0;
+        sum_of_multiples_under_n(lcm(3,5), 1000);
 }
 

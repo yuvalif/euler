@@ -2,7 +2,6 @@
 // A palindromic number reads the same both ways. The largest palindrome made from the product of two 2-digit numbers is 9009 = 91 × 99.
 // Find the largest palindrome made from the product of two 3-digit numbers.
 
-#include <iostream>
 #include <string>
 
 bool is_palindrome(unsigned n)
@@ -24,12 +23,14 @@ bool is_palindrome(unsigned n)
     return true;
 }
 
-int main()
+unsigned Problem4()
 {
+    const unsigned upper_bound = 999;
+    const unsigned lower_bound = 100;
     unsigned largest_palindrome = 0;
-    for (unsigned i = 999; i > 100; --i)
+    for (unsigned i = upper_bound; i > lower_bound; --i)
     {
-        for (unsigned j = i-1; j > 100; --j)
+        for (unsigned j = i-1; j > lower_bound; --j)
         {
             if (is_palindrome(i*j) && i*j > largest_palindrome)
             {
@@ -38,8 +39,6 @@ int main()
         }
     }
 
-    std::cout << largest_palindrome << std::endl;
-        
-    return 0;
+    return largest_palindrome;
 }
 
