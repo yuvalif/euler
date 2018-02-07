@@ -25,7 +25,7 @@ unsigned sum_of_multiples_under_n(unsigned m, unsigned n)
 }
 
 // greatest common divisor
-unsigned gcd(unsigned x, unsigned y)
+unsigned long long gcd(unsigned long long x, unsigned long long y)
 {
     if(x < y)
     {
@@ -34,7 +34,7 @@ unsigned gcd(unsigned x, unsigned y)
 
     while(y > 0)
     {
-        const unsigned tmp = x%y;
+        const auto tmp = x%y;
         x = y;
         y = tmp;
     }
@@ -42,9 +42,9 @@ unsigned gcd(unsigned x, unsigned y)
 }
 
 // least common multiplier 
-unsigned lcm(unsigned x, unsigned y)
+unsigned long long lcm(unsigned x, unsigned y)
 {
-    return x*y/gcd(x,y);
+    return (x/gcd(x,y))*y;
 }
 
 unsigned Problem1()

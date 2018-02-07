@@ -9,7 +9,8 @@ CXXFLAGS ?= -Wall -std=c++11 -O3
 LIBOBJS = problem1 \
 	   problem2 \
 	   problem3 \
-	   problem4
+	   problem4 \
+	   problem5
 
 _LIBOBJS = $(addsuffix .o, $(LIBOBJS))
 
@@ -26,7 +27,7 @@ $(PROG): $(addsuffix .cpp, $(PROG)) $(addsuffix .h, $(PROG)) $(_LIB)
 $(_LIB): $(_LIBOBJS)
 	ar -rcs $@ $(_LIBOBJS)
 
-$(_LIBOBJS): $(addsuffix .cpp, $(LIBOBJS))
+$(_LIBOBJS): $(addsuffix .cpp, $(LIBOBJS)) $(addsuffix .h, $(LIB))
 	$(CXX) $(CXXFLAGS) -c -o $@ $(@:%.o=%.cpp)
 
 clean: 
