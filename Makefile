@@ -2,7 +2,7 @@
 
 CXX ?= g++
 
-CXXFLAGS ?= -Wall -std=c++11 -O3
+CXXFLAGS ?= -Wall -std=c++14 -O3
 
 .PHONY: all clean
 

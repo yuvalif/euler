@@ -3,26 +3,36 @@
 // 
 // What is the smallest positive number that is evenly divisible by all of the numbers from 1 to 20?
 
-#include <vector>
+#include <unordered_map>
 #include <algorithm>
 #include <math.h>
 
+typedef std::unordered_map<unsigned, unsigned char> prime_factors_t;
+
 // factorize a number into its prime factors
-// the returned vector is holding the power of each prime factor
-// first element in the vector (element zero) indicate the power of 1
-// second element (element one) indicate the power of 2 etc.
-std::vector<unsigned> factorize(unsigned n)
+// the returned list is holding the prime factor and its exponent
+prime_factors_t factorize(unsigned n)
 {
-    std::vector<unsigned> v(n, 0);
+    prime_factors_t v;
     unsigned m = 2;
     // 1 is always a factor of n
-    v[0] = 1;
+    v[1] = 1;
     while (n > 1)
     {
         if (n%m == 0)
         {
             // m is a factor of n
-            ++v[m-1];
+            const auto it = v.find(m);
+            if (it == v.end())
+            {
+                // insert new prime and set exponent to 1
+                v[m] = 1;
+            }
+            else
+            {
+                // prime exists- increment exponent
+                ++(it->second);
+            }
             n /= m;
         }
         else
@@ -35,27 +45,37 @@ std::vector<unsigned> factorize(unsigned n)
     return v;
 }
 
-// given a vectror of prime factors, the original number is calculated
-// under the assumptions that each entry in the vector indicate the power of the factor
-// first element in the vector (element zero) indicate the power of 1
-// second element (element one) indicate the power of 2 etc.
-unsigned defactorize(const std::vector<unsigned> v)
+// given a list of prime factors, the original number is calculated
+// under the assumptions that each entry in the vector indicate the power of the prime factor
+unsigned defactorize(const prime_factors_t& v)
 {
     auto total = 1U;
-    auto index = 1U;
-    std::for_each(v.begin(), v.end(), [&](unsigned n){total *= pow(index++, n);});
+    std::for_each(v.begin(), v.end(), 
+            [&](const auto& f){total *= pow(f.first, f.second);});
     return total;
 }
 
 unsigned long long Problem5()
 {
-    std::vector<unsigned> max_factors(20, 0);
-    for (auto i = 1U; i <= max_factors.size(); ++i)
+    prime_factors_t max_factors;
+    for (auto i = 1U; i <= 20; ++i)
     {
-        const std::vector<unsigned>& v = factorize(i);
-        for (auto j = 0U; j < v.size(); ++j)
+        // factorize the next number
+        const prime_factors_t& v = factorize(i);
+        for (const auto& f: v)
         {
-            max_factors[j] = std::max(max_factors[j], v[j]);
+            // check if prime is already in the max factors list
+            const auto it = max_factors.find(f.first);
+            if (it == v.end())
+            {
+                // add to list
+                max_factors.insert(f);
+            }
+            else
+            {
+                // update to max value between existing and new
+                it->second = std::max(it->second, f.second);
+            }
         }
     }
 
