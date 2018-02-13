@@ -23,9 +23,9 @@ const double log_phi = log(phi);
 
 // find the largets fibonacci number smaller than n (based on approximation)
 // see here: https://en.wikipedia.org/wiki/Fibonacci_number#Computation_by_rounding
-unsigned long long find_nearest_fibonacci_index(unsigned n)
+unsigned find_nearest_fibonacci_index(unsigned long long n)
 {
-    return (unsigned long long)((log(n) + log_sqrt_5)/log_phi);
+    return (unsigned)((log(n) + log_sqrt_5)/log_phi);
 }
 
 unsigned long long Problem2()
