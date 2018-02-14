@@ -6,8 +6,9 @@
 // By considering the terms in the Fibonacci sequence whose values do not exceed four million, find the sum of the even-valued terms.
 
 #include <math.h>
+#include <iostream>
 
-const double sqrt_5 = sqrt(5);
+const double sqrt_5 = sqrt(5.0);
 const double phi = (1.0 + sqrt_5)/2.0;
 const double psi = -1.0/phi;
 
@@ -25,7 +26,11 @@ const double log_phi = log(phi);
 // see here: https://en.wikipedia.org/wiki/Fibonacci_number#Computation_by_rounding
 unsigned find_nearest_fibonacci_index(unsigned long long n)
 {
-    return (unsigned)((log(n) + log_sqrt_5)/log_phi);
+    if (n == 0)
+    {
+        return 0;
+    }
+    return (unsigned)floor(log((double)n*sqrt_5 + 0.5)/log_phi);
 }
 
 unsigned long long Problem2()
