@@ -9,7 +9,7 @@
 // first element (a1)
 // number of elements (n)
 // series difference (d)
-unsigned aritmetic_sereies_sum(unsigned a1, unsigned n, unsigned d)
+unsigned arithmetic_series_sum(unsigned a1, unsigned n, unsigned d)
 {
     // an = a1 + (n - 1)*d
     // Sn = n*(a1 + an)/2
@@ -21,7 +21,7 @@ unsigned sum_of_multiples_under_n(unsigned m, unsigned n)
 {
     // the sum of multiples of m under n is the sum of the arithmetic
     // series that star with m, has difference of m, and has n/m elements
-    return aritmetic_sereies_sum(m, n/m, m);
+    return arithmetic_series_sum(m, n/m, m);
 }
 
 // greatest common divisor
