@@ -25,7 +25,7 @@ public:
     {
         for (auto result : results)
         {
-            TS_ASSERT_EQUALS(fibonacci(result.first), result.second);
+            TS_ASSERT_EQUALS((long long)(fibonacci(result.first)), (long long)(result.second));
         }
     }
     

@@ -45,7 +45,7 @@ $(TEST_RUNNER): $(_TEST_RUNNER_SRC) $(_LIB)
 	$(CXX) -o $@ $< -L . -l$(LIB)
 
 $(_TEST_RUNNER_SRC): $(_TESTS)
-	cxxtestgen -o $@ --error-printer $^
+	cxxtestgen -o $@ --longlong="long long" --error-printer $^
 
 clean: 
 	rm -f $(PROG) $(_LIB) $(_LIBOBJS) $(TEST_RUNNER) $(_TEST_RUNNER_SRC)
